@@ -14,8 +14,8 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
         root: path.join(__dirname)
     };
 
-    res.type('application/pkcs7-mime');
     res.status(200);
+    res.setHeader('Content-Disposition', 'attachment; filename=' + 'apple-app-site-association');
     res.sendFile('apple-app-site-association.json', options)
 });
 
