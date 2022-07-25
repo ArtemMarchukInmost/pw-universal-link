@@ -20,7 +20,6 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
     res.setHeader('Keep-Alive', 'timeout=60');
     res.removeHeader('Server');
     res.removeHeader('X-Powered-By');
-    res.removeHeader('Content-Disposition');
     res.removeHeader('Accept-Ranges');
     res.removeHeader('Last-Modified');
     res.removeHeader('Etag');
