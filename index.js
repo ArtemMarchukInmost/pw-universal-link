@@ -4,6 +4,10 @@ const path = require('path');
 const PORT = process.env.PORT ?? 3000;
 const app = express();
 
+app.get('', (req, res) => {
+    res.send('<h1>Hello</h1>');
+})
+
 app.get('/.well-known/apple-app-site-association', (req, res) => {
     const options = {
         root: path.join(__dirname)
