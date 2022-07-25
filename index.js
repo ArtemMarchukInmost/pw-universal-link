@@ -16,6 +16,15 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
 
     res.status(200);
     res.setHeader('Content-Disposition', 'attachment; filename=' + 'apple-app-site-association');
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.setHeader('Keep-Alive', 'timeout=60');
+    res.removeHeader('Server');
+    res.removeHeader('X-Powered-By');
+    res.removeHeader('Content-Disposition');
+    res.removeHeader('Accept-Ranges');
+    res.removeHeader('Last-Modified');
+    res.removeHeader('Etag');
+    res.removeHeader('Cache-Control');
     res.sendFile('apple-app-site-association.json', options)
 });
 
