@@ -9,6 +9,7 @@ app.get('/apple-app-site-association', (req, res) => {
         root: path.join(__dirname)
     };
 
+    res.type('application/pkcs7-mime');
     res.sendFile('apple-app-site-association.json', options)
 });
 
