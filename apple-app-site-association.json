@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "MGMKRT63C6.com.powderwatts.powderwatts.dev",
-        "paths": ["*"]
+        "paths": ["/dev/*"]
       }
     ]
   }
