@@ -3,8 +3,16 @@
     "apps": [],
     "details": [
       {
+        "appID": "MGMKRT63C6.com.powderwatts.powderwatts",
+        "paths": ["/prod/*"]
+      },
+      {
         "appID": "MGMKRT63C6.com.powderwatts.powderwatts.dev",
         "paths": ["/dev/*"]
+      },
+      {
+        "appID": "MGMKRT63C6.com.powderwatts.powderwatts.staging",
+        "paths": ["/stage/*"]
       }
     ]
   }
