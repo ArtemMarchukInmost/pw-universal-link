@@ -38,7 +38,7 @@ app.get('/.well-known/assetlinks.json', (req, res) => {
 });
 
 app.get('/hook', (req, res) => {
-    console.log(req);
+    console.log(req.body, req.url);
 });
 
 app.listen(PORT, () => {
