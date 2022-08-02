@@ -37,6 +37,10 @@ app.get('/.well-known/assetlinks.json', (req, res) => {
     res.sendFile('assetlinks.json', options)
 });
 
+app.get('/hook', (req, res) => {
+    console.log(req);
+});
+
 app.listen(PORT, () => {
     console.log('server has been started');
 });
