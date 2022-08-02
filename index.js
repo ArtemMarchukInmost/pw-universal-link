@@ -37,7 +37,7 @@ app.get('/.well-known/assetlinks.json', (req, res) => {
     res.sendFile('assetlinks.json', options)
 });
 
-app.get('/hook', (req, res) => {
+app.post('/hook', (req, res) => {
     console.log(req.body, req.url);
 });
 
