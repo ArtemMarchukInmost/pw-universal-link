@@ -4,7 +4,7 @@ const HOOK_KEY = process.env.HOOK_KEY;
 const PORT = process.env.PORT ?? 3000;
 const app = express();
 
-const {proceedExecutionStart} = require('./utils');
+const {proceedExecutionEnd} = require('./utils');
 
 app.use(bodyParser());
 
@@ -26,7 +26,7 @@ app.post('/hook/end', async (req, res) => {
         console.log(req.body);
 
         if (req.body.event === 'JobReportSummary') {
-            await proceedExecutionStart(data);
+            await proceedExecutionEnd(data);
         }
 
         res.sendStatus(200);
