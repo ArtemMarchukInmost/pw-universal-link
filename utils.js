@@ -92,7 +92,9 @@ const proceedExecutionStart = async (data) => {
         headers: {authorization: TEST_PROJECT_API_KEY},
     });
 
-    const executionId = executionResponse.data.find(execution => execution.executionStart === data.started).id;
+    const executionId = executionResponse.data.find(execution => {
+        return execution.type === 'JOB' && execution.name === data.name
+    }).id;
 
     await updateGoogleSheet({
         spreadSheetName,
