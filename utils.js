@@ -7,9 +7,7 @@ const sendFailedMessageToChat = async (data) => {
     const message = `<font color=\\"#ff0000\\"><b>${data.name} was failed.<b></font> <${GOOGLE_SHEET_URL}| Check it out>.`;
 
     await axios.post(GOOGLE_CHAT_WEBHOOK, {
-        data: {
-            text: message
-        }
+        text: message
     });
 };
 
