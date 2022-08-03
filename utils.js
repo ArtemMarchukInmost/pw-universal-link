@@ -4,7 +4,7 @@ const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1dIMuGeM9LPM880
 
 
 const sendFailedMessageToChat = async (data) => {
-    const message = `${data.name} was failed. <${GOOGLE_SHEET_URL}| Check it out>.`;
+    const message = `<font color=\\"#ff0000\\"><b>${data.name} was failed.<b></font> <${GOOGLE_SHEET_URL}| Check it out>.`;
 
     await axios.post(GOOGLE_CHAT_WEBHOOK, {
         data: {
