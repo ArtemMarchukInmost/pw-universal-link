@@ -73,7 +73,7 @@ const updateGoogleSheet = async (executionData) => {
 
         const newRow = row;
 
-        newRow[1] = executionData.startTime ? moment(executionData.startTime).format('DD.MM.YYY HH:mm') : newRow[1];
+        newRow[1] = executionData.startTime ? moment(executionData.startTime).format('DD.MM.YYYY HH:mm') : newRow[1];
         newRow[2] = executionData.duration ? executionData.duration : newRow[2];
         newRow[3] = executionData.buildNumber ? executionData.buildNumber : newRow[3];
         newRow[4] = executionData.status ? executionData.status : newRow[4];
@@ -86,7 +86,7 @@ const updateGoogleSheet = async (executionData) => {
     if (!isFoundThisExecution) {
         const newRow = [
             executionData.executionId,
-            executionData.startTime ? moment(executionData.startTime).format('DD.MM.YYY HH:mm') : '',
+            executionData.startTime ? moment(executionData.startTime).format('DD.MM.YYYY HH:mm') : '',
             executionData.duration ? executionData.duration : '',
             executionData.buildNumber,
             executionData.status,
