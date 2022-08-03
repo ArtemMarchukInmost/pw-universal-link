@@ -20,13 +20,17 @@ app.post('/hook/end', async (req, res) => {
         res.sendStatus(403);
     }
 
-    const data = req.body.data;
-    console.log(data);
-    if (data.result  === 'Failed') {
-        await sendFailedMessageToChat(data);
-    }
+    try {
+        const data = req.body.data;
+        console.log(data);
+        if (data.result  === 'Failed') {
+            await sendFailedMessageToChat(data);
+        }
 
-    res.sendStatus(200);
+        res.sendStatus(200);
+    } catch (e) {
+        res.sendStatus(500);
+    }
 });
 
 app.listen(PORT, () => {
