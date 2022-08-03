@@ -5,7 +5,7 @@ const TEST_PROJECT_API_KEY = process.env.TEST_PROJECT_API_KEY;
 const TEST_PROJECT_PROJECT_ID = 'I0OwalcUV02uT4wmupf4-w';
 const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1dIMuGeM9LPM880OYWyIwKBoe68zuUfE1YWFEPo8506k/edit?usp=sharing';
 
-const {uploadReportToGoogle} = require('./googleUtils');
+const {uploadReportToGoogle, updateGoogleSheet} = require('./googleUtils');
 
 const sendFailedMessageToChat = async (data) => {
     await axios.post(GOOGLE_CHAT_WEBHOOK, {
@@ -60,7 +60,12 @@ const downloadReportPdf = async (data) => {
         responseEncoding: 'binary',
     });
 
-    return  await uploadReportToGoogle(reportResponse.data, JOB_ID, EXECUTION_ID);
+    const pdfLink = await uploadReportToGoogle(reportResponse.data, JOB_ID, EXECUTION_ID);
+
+    return {
+        pdfLink,
+        execution: EXECUTION_ID,
+    };
 }
 
 const proceedExecutionEnd = async (data) => {
@@ -68,11 +73,36 @@ const proceedExecutionEnd = async (data) => {
         await sendFailedMessageToChat(data);
     }
 
-    const url = await downloadReportPdf(data);
+    const urlRes = await downloadReportPdf(data);
 
-    console.log(url);
+    await updateGoogleSheet({
+        spreadSheetName: data.name,
+        executionId: urlRes.execution,
+        status: data.result,
+        pdf: urlRes.pdfLink,
+        report: data.reportUrl,
+        duration: data.duration,
+    });
+}
+
+const proceedExecutionStart = async (data) => {
+    const spreadSheetName = data.name;
+
+    const executionResponse  = await axios.get('/v2/executions',{
+        headers: {authorization: TEST_PROJECT_API_KEY},
+    });
+
+    const executionId = executionResponse.data.find(execution => execution.executionStart === data.started).id;
+
+    await updateGoogleSheet({
+        spreadSheetName,
+        executionId,
+        startTime: new Date(data.started),
+        status: 'Running',
+    });
 }
 
 module.exports = {
     proceedExecutionEnd,
+    proceedExecutionStart,
 };
