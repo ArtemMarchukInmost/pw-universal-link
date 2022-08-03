@@ -18,6 +18,7 @@ app.post('/hook/end', async (req, res) => {
 
     if (key !== HOOK_KEY) {
         res.sendStatus(403);
+        return;
     }
 
     try {
