@@ -4,7 +4,7 @@ const HOOK_KEY = process.env.HOOK_KEY;
 const PORT = process.env.PORT ?? 3000;
 const app = express();
 
-const {sendFailedMessageToChat} = require('./utils');
+const {proceedExecutionStart} = require('./utils');
 
 app.use(bodyParser());
 
@@ -24,8 +24,9 @@ app.post('/hook/end', async (req, res) => {
     try {
         const data = req.body.data;
         console.log(data);
-        if (data.result  === 'Failed') {
-            await sendFailedMessageToChat(data);
+
+        if (req.body.event === 'JobReportSummary') {
+            await proceedExecutionStart(data);
         }
 
         res.sendStatus(200);
