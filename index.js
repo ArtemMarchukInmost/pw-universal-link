@@ -23,7 +23,7 @@ app.post('/hook/end', async (req, res) => {
 
     try {
         const data = req.body.data;
-        console.log(data);
+        console.log(req.body);
 
         if (req.body.event === 'JobReportSummary') {
             await proceedExecutionStart(data);
