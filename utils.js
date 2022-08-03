@@ -88,7 +88,7 @@ const proceedExecutionEnd = async (data) => {
 const proceedExecutionStart = async (data) => {
     const spreadSheetName = data.name;
 
-    const executionResponse  = await axios.get('/v2/executions',{
+    const executionResponse  = await axios.get('https://api.testproject.io/v2/executions',{
         headers: {authorization: TEST_PROJECT_API_KEY},
     });
 
